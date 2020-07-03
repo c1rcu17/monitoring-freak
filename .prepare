@@ -1,0 +1,11 @@
+. .venv/bin/activate
+. ./.env
+
+STTY=$(stty -F $SERIAL_PORT -g)
+
+clean() {
+    trap '' INT TERM EXIT
+    stty -F $SERIAL_PORT $STTY
+}
+
+trap clean INT TERM EXIT
